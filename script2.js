@@ -43,13 +43,13 @@ function addingAndPolulatingMovieData(params) {
 let favoriteMovies = JSON.parse(localStorage.getItem('favoriteMovies')) || [];
 
 // Get all favorite buttons and attach event listeners
-const favoriteButtons = document.querySelectorAll(".favButton");
-favoriteButtons.forEach(button => {
-    button.addEventListener("click", addToFavlist);
-});
+const favoriteButtons = document.querySelector(".favButton");
+favoriteButtons.addEventListener("click", (event)=>{addToFavlist(event)})
 
 function addToFavlist(event) {
-    const movieTitle = event.target.parentElement.querySelector("h5").textContent.trim();
+    // const movieTitle = event.target.parentElement.querySelector("h5").textContent.trim();
+    const movieTitle = favoriteButtons.parentElement.getElementsByTagName("h6")[0].textContent.split(":")[1].trim();
+    console.log(movieTitle);
     const isMarked = event.target.classList.contains("marked");
 
     if (!isMarked) {
@@ -64,6 +64,7 @@ function addToFavlist(event) {
 function checkInThelocalStorage(name) {
     // Check if the movie is already in the favoriteMovies list
     if (!favoriteMovies.includes(name)) {
+        console.log("yes")
         favoriteMovies.push(name);
         // Store the updated favoriteMovies list back to localStorage
         localStorage.setItem('favoriteMovies', JSON.stringify(favoriteMovies));

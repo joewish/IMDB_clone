@@ -56,7 +56,7 @@ async function searchBarRecomendation(params) {
     const options = {
         method: 'GET',
         headers: {
-            'X-RapidAPI-Key': '',
+            'X-RapidAPI-Key': '25148d09e0msh462a593aaee037ep12a628jsn1cffdbcd03b',
             'X-RapidAPI-Host': 'moviesminidatabase.p.rapidapi.com'
         }
     };
