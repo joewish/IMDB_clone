@@ -1,0 +1,39 @@
+/* NAv section Styling */
+.container-fluid{
+    color: bisque;
+    background-color: black;
+}
+.navbar-brand{
+    background-color: yellow;
+    color: black;
+}
+
+.searchButton{
+    color: black;
+    background-color: white;
+}
+
+.btn-outline-secondary
+{
+    float:right;
+}
+img{
+    /* height: 250px; */
+    width: 100%;
+}
+.card-title{
+    font-size: 1rem;
+}
+
+/* favorite Button */
+
+.marked{
+    color: white;
+    background-color: red;
+}
+
+/* body */
+body{
+    background-color: black;
+    color: white;
+}
