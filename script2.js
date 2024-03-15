@@ -39,36 +39,40 @@ function addingAndPolulatingMovieData(params) {
 }
 
 // handling the favirote  
-// const favoriteButton= document.querySelector(".favButton")
-// favoriteButton.addEventListener("click",addToFavlist)
+// Retrieve the existing favoriteMovies from localStorage
+let favoriteMovies = JSON.parse(localStorage.getItem('favoriteMovies')) || [];
 
-// function addToFavlist() {
-//     const movieTitle  = favoriteButton.parentElement.children[1].textContent.split(":")[1].trim()
-//     if(!favoriteButton.classList.contains("marked")){
-//         favoriteButton.classList.add("marked")
-//         checkInThelocalStorage(movieTitle)//fcuntion to check whether the movie is already in the local storage 
-//     }else{
-//         favoriteButton.classList.remove("marked")
-//     }
-// }
-// console.log(localStorage)
-// function checkInThelocalStorage(movieName) {
-//     if(localStorage.getItem(movieName)==null){
-//         console.log(favoriteMovies.getItem(movieName))
-//         // localStorage.setItem('favoriteMovies', movieName);
-//         // console.log(localStorage)
-//     }
-// }
-// setTimeout(()=>{
-//     const favButton = document.querySelectorAll(".favButton");
-//     favButton.addEventListener("click",addingToFavoriteList)
-// },1000)
-// function addingToFavoriteList(){
-//     if(descriptionTag.children.length>0){
-//         console.log(document.querySelectorAll(".favButton"))
-//     }else{
-//         console.log("No description")
-//     }
-// }
-localStorage.removeItem("favoriteMovies","Hitman's Wife's Bodyguard")
-console.log(localStorage)
+// Get all favorite buttons and attach event listeners
+const favoriteButtons = document.querySelectorAll(".favButton");
+favoriteButtons.forEach(button => {
+    button.addEventListener("click", addToFavlist);
+});
+
+function addToFavlist(event) {
+    const movieTitle = event.target.parentElement.querySelector("h5").textContent.trim();
+    const isMarked = event.target.classList.contains("marked");
+
+    if (!isMarked) {
+        event.target.classList.add("marked");
+        checkInThelocalStorage(movieTitle);
+    } else {
+        event.target.classList.remove("marked");
+        removeFromLocalStorage(movieTitle);
+    }
+}
+
+function checkInThelocalStorage(name) {
+    // Check if the movie is already in the favoriteMovies list
+    if (!favoriteMovies.includes(name)) {
+        favoriteMovies.push(name);
+        // Store the updated favoriteMovies list back to localStorage
+        localStorage.setItem('favoriteMovies', JSON.stringify(favoriteMovies));
+    }
+}
+
+function removeFromLocalStorage(name) {
+    // Remove the movie from the favoriteMovies list
+    favoriteMovies = favoriteMovies.filter(movie => movie !== name);
+    // Store the updated favoriteMovies list back to localStorage
+    localStorage.setItem('favoriteMovies', JSON.stringify(favoriteMovies));
+}
